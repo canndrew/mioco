@@ -5,7 +5,7 @@ extern crate httparse;
 use std::net::SocketAddr;
 use std::str::FromStr;
 use std::io::{Write, Read};
-use mioco::mio::tcp::{TcpSocket};
+use mioco::mio::tcp::TcpListener;
 
 const DEFAULT_LISTEN_ADDR : &'static str = "127.0.0.1:5555";
 
@@ -29,10 +29,7 @@ Hello World\r
 fn main() {
     env_logger::init().unwrap();
     let addr = listend_addr();
-
-    let sock = TcpSocket::v4().unwrap();
-    sock.bind(&addr).unwrap();
-    let sock = sock.listen(1024).unwrap();
+    let sock = TcpListener::bind(&addr).unwrap();
 
     println!("Starting mioco http server on {:?}", sock.local_addr().unwrap());
 

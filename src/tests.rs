@@ -93,6 +93,7 @@ fn contain_panics_in_subcoroutines() {
 }
 
 #[test]
+#[cfg(target_family = "unix")]
 fn long_chain() {
     for &threads in THREADS_N.iter() {
         let finished_ok = Arc::new(Mutex::new(false));
@@ -146,6 +147,7 @@ fn long_chain() {
 }
 
 #[test]
+#[cfg(target_family = "unix")]
 fn lots_of_event_sources() {
     for &threads in THREADS_N.iter() {
         let finished_ok = Arc::new(Mutex::new(false));
@@ -210,6 +212,7 @@ fn lots_of_event_sources() {
 
 /// Test if drop is performed on IOs when coroutine panics.
 #[test]
+#[cfg(target_family = "unix")]
 fn destructs_io_on_panic() {
     for &threads in THREADS_N.iter() {
         let finished_ok = Arc::new(Mutex::new(false));
@@ -244,6 +247,7 @@ fn destructs_io_on_panic() {
 }
 
 #[test]
+#[cfg(target_family = "unix")]
 fn timer_times_out() {
     for &threads in THREADS_N.iter() {
         let finished_ok_1 = Arc::new(Mutex::new(false));
@@ -673,6 +677,7 @@ fn simple_yield() {
 }
 
 #[test]
+#[cfg(target_family = "unix")]
 fn simple_unwrap() {
     for &threads in THREADS_N.iter() {
         let finished_ok = Arc::new(Mutex::new(false));
